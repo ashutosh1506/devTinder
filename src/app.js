@@ -1,18 +1,21 @@
 const express = require("express");
 const app = express();
 
-app.get("/user", (req, res) => {
+app.get("/user/:userId/:name", (req, res) => {
+  console.log({ ...req.params });
+
   res.send("GET call");
 });
-app.post("/user", (req, res) => {
-  res.send("POST call");
+app.get("/user", (req, res) => {
+  console.log({ ...req.query });
+
+  res.send("GET call");
 });
-app.patch("/user", (req, res) => {
-  res.send("PATCH call");
+
+app.get(/.*fly$/, (req, res) => {
+  res.send("Regex call tested");
 });
-app.delete("/user", (req, res) => {
-  res.send("DELETE call");
-});
+
 app.listen(7777, () => {
   console.log("Server Listening on Port 7777");
 });
