@@ -1,19 +1,18 @@
 const express = require("express");
 const app = express();
+const { adminAuth, userAuth } = require("./middlewares/auth");
 
-app.get("/user/:userId/:name", (req, res) => {
-  console.log({ ...req.params });
+// auth middleware handler
+app.use("/admin", adminAuth);
 
-  res.send("GET call");
+app.post("/admin/getAllData", (req, res) => {
+  res.send("All Data Sent");
 });
-app.get("/user", (req, res) => {
-  console.log({ ...req.query });
-
-  res.send("GET call");
+app.post("/admin/deleteUser", (req, res) => {
+  res.send("User Deleted");
 });
-
-app.get(/.*fly$/, (req, res) => {
-  res.send("Regex call tested");
+app.get("/user", userAuth, (req, res, next) => {
+  res.send("Welcome To NodeJs World");
 });
 
 app.listen(7777, () => {
