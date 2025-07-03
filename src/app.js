@@ -48,6 +48,38 @@ app.get("/user/getAllData", async (req, res) => {
     res.send(users);
   }
 });
+// Delete a user using Id
+app.delete("/user/deleteUser", async (req, res) => {
+  const userId = req.body._id;
+
+  try {
+    const user = await User.findByIdAndDelete(userId);
+    if (!user) {
+      res.status(404).send("User Not Found");
+    } else {
+      res.send("User Delelted Successfully");
+    }
+  } catch (err) {
+    res.status(400).send("Error Deleting User: " + err.message);
+  }
+});
+// Update a user using Id
+app.put("/user/updateUser", async (req, res) => {
+  const userId = req.body.userId;
+  try {
+    const user = await User.findByIdAndUpdate(userId, {
+      lastName: "Sharma",
+      age: 45,
+    });
+    if (!user) {
+      res.status(404).send("User Not Found");
+    } else {
+      res.send("User Updated Successfully");
+    }
+  } catch (err) {
+    res.status(400).send("Error Updating User: " + err.message);
+  }
+});
 // Connect to Database first and then start the server
 connectDB()
   .then(() => {
