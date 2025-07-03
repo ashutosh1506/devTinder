@@ -1,4 +1,4 @@
-# Order of Routes is very important
+- Order of Routes is very important
 
 # Dynamic Routes
 
@@ -11,28 +11,5 @@
 
 # Connecting to database
 
-- Connect to Database first and then start the server
-  app.js
-  connectDB()
-  .then(() => {
-  console.log("Database Connected Successfully");
-  const PORT = process.env.PORT;
-  app.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT} `);
-  });
-  })
-  .catch((err) => {
-  console.log("Database Connectivity Error");
-  });
-
-database.js
-const mongoose = require("mongoose");
-
-const connectDB = async () => {
-await mongoose.connect(
-"mongodb+srv://gaashu001:ashu12345@cluster0.ro8bqmn.mongodb.net/"
-);
-};
-
-module.exports = connectDB;
+![alt text](/Readme%20Images/image2.png)
 ![alt text](/Readme%20Images/image.png)
