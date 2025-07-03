@@ -35,4 +35,4 @@ await mongoose.connect(
 };
 
 module.exports = connectDB;
-![alt text](image.png)
+![alt text](/Readme%20Images/image.png)
