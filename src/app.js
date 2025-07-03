@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const connectDB = require("./config/database");
 const User = require("./models/user");
+const Admin = require("./models/admin");
 require("dotenv").config();
 
 app.use(express.json());
@@ -16,7 +17,37 @@ app.post("/user/signup", async (req, res) => {
     res.status(400).send("Error Sending Data: " + err.message);
   }
 });
+// Creating Admin post API
+app.post("/admin/signup", async (req, res) => {
+  const admin = new Admin(req.body);
+  try {
+    await admin.save();
+    res.send("Admin Added Successfully!");
+  } catch (err) {
+    res.status(400).send("Error Sending Data: " + err.message);
+  }
+});
+// User Data Get API
+app.get("/user/getData", async (req, res) => {
+  const userEmail = req.body.email;
+  const user = await User.findOne({ email: userEmail });
+  if (!user) {
+    res.status(404).send("User Not Found");
+  } else {
+    res.send(user);
+  }
+});
 
+// All Users Data API
+app.get("/user/getAllData", async (req, res) => {
+  const userId = req.body._id;
+  const users = await User.find({ _id: userId });
+  if (!users.length) {
+    res.status(404).send("User Not Found");
+  } else {
+    res.send(users);
+  }
+});
 // Connect to Database first and then start the server
 connectDB()
   .then(() => {
