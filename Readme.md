@@ -13,3 +13,8 @@
 
 ![alt text](/Readme%20Images/image2.png)
 ![alt text](/Readme%20Images/image.png)
+
+# JSON Middleware
+
+- To convert json object to js object we need to use json middleware provided by express as vsCode understands js object not json object.
+- app.use(express.json());

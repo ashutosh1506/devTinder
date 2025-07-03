@@ -4,14 +4,11 @@ const connectDB = require("./config/database");
 const User = require("./models/user");
 require("dotenv").config();
 
+app.use(express.json());
+
 // Pushing some hard coded data to database to test our POST API
 app.post("/user/signup", async (req, res) => {
-  const user = new User({
-    firstName: "John",
-    lastName: "Doe",
-    email: "john@gmail.com",
-    age: 20,
-  });
+  const user = new User(req.body);
   try {
     await user.save();
     res.send("User Added Successfully!");
