@@ -80,6 +80,21 @@ app.put("/user/updateUser", async (req, res) => {
     res.status(400).send("Error Updating User: " + err.message);
   }
 });
+//Update a user using email Id with patch API
+app.patch("/user/updateUser", async (req, res) => {
+  const email = req.body.email;
+  const data = req.body;
+  try {
+    const user = await User.findOneAndUpdate({ email: email }, data);
+    if (!user) {
+      res.status(404).send("User Not Found");
+    } else {
+      res.send("User Updated Successfully");
+    }
+  } catch (err) {
+    res.status(400).send("Error Updating User: " + err.message);
+  }
+});
 // Connect to Database first and then start the server
 connectDB()
   .then(() => {
