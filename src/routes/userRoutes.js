@@ -24,6 +24,25 @@ const userSignup = async (req, res) => {
   }
 };
 
+const userLogin = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ email: email });
+    if (!user) {
+      res.send("Invalid Credentials.");
+    }
+
+    const isValidPassword = await bcrypt.compare(password, user.password);
+
+    if (!isValidPassword) {
+      res.send("Invalid Credentials.");
+    } else res.send("Login Successful");
+  } catch (err) {
+    res.status(400).send("ERROR: " + err.message);
+  }
+};
+
 const getUserData = async (req, res) => {
   const userId = req.params.userId;
   const user = await User.findOne({ _id: userId });
@@ -84,6 +103,7 @@ const updateUser = async (req, res) => {
 };
 module.exports = {
   userSignup,
+  userLogin,
   getUserData,
   getAllUsersData,
   deleteUser,

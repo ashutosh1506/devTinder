@@ -7,6 +7,7 @@ const {
   getAllUsersData,
   deleteUser,
   updateUser,
+  userLogin,
 } = require("./routes/userRoutes");
 require("dotenv").config();
 
@@ -14,6 +15,7 @@ app.use(express.json());
 
 // Signup API
 app.post("/user/signup", userSignup);
+app.post("/user/login", userLogin);
 app.get("/user/getUserData/:userId", getUserData);
 app.get("/user/getAllData", getAllUsersData);
 app.delete("/user/deleteUser/:userId", deleteUser);
