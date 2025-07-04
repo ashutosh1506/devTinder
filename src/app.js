@@ -64,12 +64,19 @@ app.delete("/user/deleteUser", async (req, res) => {
   }
 });
 // Update a user using Id
-app.put("/user/updateUser", async (req, res) => {
-  const userId = req.body.userId;
+app.put("/user/updateUser/:userId", async (req, res) => {
+  const userId = req.params.userId;
+  const data = req.body;
+  const ALLOWED_UPDATES = ["gender", "age", "photoURL", "skills"];
   try {
-    const user = await User.findByIdAndUpdate(userId, {
-      lastName: "Sharma",
-      age: 45,
+    const isAllowed = Object.keys(data).every((k) =>
+      ALLOWED_UPDATES.includes(k)
+    );
+    if (!isAllowed) {
+      throw new Error("Update of certain fields is not allowed!");
+    }
+    const user = await User.findByIdAndUpdate(userId, data, {
+      runValidators: true,
     });
     if (!user) {
       res.status(404).send("User Not Found");
@@ -81,11 +88,20 @@ app.put("/user/updateUser", async (req, res) => {
   }
 });
 //Update a user using email Id with patch API
-app.patch("/user/updateUser", async (req, res) => {
-  const email = req.body.email;
+app.patch("/user/updateUser/:email", async (req, res) => {
+  const email = req.params.email;
   const data = req.body;
+  const ALLOWED_UPDATES = ["gender", "age", "photoURL", "skills"];
   try {
-    const user = await User.findOneAndUpdate({ email: email }, data);
+    const isAllowed = Object.keys(data).every((k) =>
+      ALLOWED_UPDATES.includes(k)
+    );
+    if (!isAllowed) {
+      throw new Error("Update of certain fields is not allowed!");
+    }
+    const user = await User.findOneAndUpdate({ email: email }, data, {
+      runValidators: true,
+    });
     if (!user) {
       res.status(404).send("User Not Found");
     } else {

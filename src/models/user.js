@@ -41,8 +41,8 @@ const userSchema = new mongoose.Schema(
     },
     age: {
       type: Number,
-      minLength: 0,
-      maxLength: 3,
+      min: 18,
+      max: 100,
     },
     photoURL: {
       type: String,
@@ -51,6 +51,12 @@ const userSchema = new mongoose.Schema(
     },
     skills: {
       type: [String],
+      validate: {
+        validator: function (arr) {
+          return arr.length <= 5;
+        },
+        message: "Max 5 Skills are allowed!",
+      },
     },
   },
   {
