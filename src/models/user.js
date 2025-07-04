@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const validator = require("validator");
 
 const userSchema = new mongoose.Schema(
   {
@@ -13,20 +14,19 @@ const userSchema = new mongoose.Schema(
     },
     email: {
       type: String,
-      required: true,
-      unique: true,
-      lowercase: true,
-      trim: true,
+      validate(value) {
+        if (!validator.isEmail(value)) {
+          throw new Error("Email Id is not Valid!");
+        }
+      },
     },
     password: {
       type: String,
       trim: true,
       required: true,
       validate(value) {
-        if (!/[#@\$%\^&\*]/.test(value)) {
-          throw new Error(
-            "Password must contain at least one special character"
-          );
+        if (!validator.isStrongPassword(value)) {
+          throw new Error("Enter a strong password!");
         }
       },
     },
@@ -48,6 +48,11 @@ const userSchema = new mongoose.Schema(
       type: String,
       default:
         "https://icons.iconarchive.com/icons/icons8/android/256/Users-User-icon.png",
+      validate(value) {
+        if (!validator.isURL(value)) {
+          throw new Error("Enter a valid photo URL");
+        }
+      },
     },
     skills: {
       type: [String],
