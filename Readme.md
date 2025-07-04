@@ -11,10 +11,20 @@
 
 # Connecting to database
 
-![alt text](/Readme%20Images/image2.png)
-![alt text](/Readme%20Images/image.png)
+- install mongoose package
+  ![alt text](/Readme%20Images/image2.png)
+  ![alt text](/Readme%20Images/image.png)
 
 # JSON Middleware
 
 - To convert json object to js object we need to use json middleware provided by express as vsCode understands js object not json object.
 - app.use(express.json());
+
+# npm validator
+
+- npm i validator
+- Check for validations like correct email, strong password, etc.
+
+# Encrypting Passwords
+
+- npm i bcrypt
