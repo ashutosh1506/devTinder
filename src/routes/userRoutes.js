@@ -1,7 +1,6 @@
 const User = require("../models/user");
 const { signupValidation } = require("../utils/validation");
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
 
 const userSignup = async (req, res) => {
   try {
@@ -34,14 +33,12 @@ const userLogin = async (req, res) => {
       res.send("Invalid Credentials.");
     }
 
-    const isValidPassword = await bcrypt.compare(password, user.password);
+    const isValidPassword = await user.validatePassword(password);
 
     if (!isValidPassword) {
       throw new Error("Invalid Credentials.");
     } else {
-      const token = jwt.sign({ _id: user._id }, "DEV_TIDER@1506", {
-        expiresIn: "1d",
-      });
+      const token = await user.getJWT();
       res.cookie("token", token, {
         expires: new Date(Date.now() + 8 * 3600000), // Cookie will be removed after 8 hrs
       }); // Set the cookie
