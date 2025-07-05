@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const connectDB = require("./config/database");
+const cookieParser = require("cookie-parser");
 const {
   userSignup,
   getUserData,
@@ -8,15 +9,20 @@ const {
   deleteUser,
   updateUser,
   userLogin,
+  userProfile,
+  sendConnectionRequest,
 } = require("./routes/userRoutes");
+const { userAuth } = require("./middlewares/auth");
 require("dotenv").config();
 
 app.use(express.json());
-
+app.use(cookieParser());
 // Signup API
 app.post("/user/signup", userSignup);
 app.post("/user/login", userLogin);
 app.get("/user/getUserData/:userId", getUserData);
+app.get("/user/userProfile", userAuth, userProfile);
+app.post("/user/sendConnectionRequest", userAuth, sendConnectionRequest);
 app.get("/user/getAllData", getAllUsersData);
 app.delete("/user/deleteUser/:userId", deleteUser);
 app.patch("/user/updateUser/:userId", updateUser);

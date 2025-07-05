@@ -28,3 +28,22 @@
 # Encrypting Passwords
 
 - npm i bcrypt
+- For hashing the password :
+
+  - const hashedPassword = await bcrypt.hash(password, 10);
+
+- For comparing the password :
+  - const isValid = await bcrypt.compare(password, hashedPassword);-
+
+## Cookies
+
+# To send a cookie:
+
+- res.cookie("token", token);
+
+# To get a cookie:
+
+- We need to use a middleware like cookie-parser to get the cookie.
+- npm i cookie-parser
+- const cookies = req.cookies.token;
+- app.use(cookieParser()); (app.js)

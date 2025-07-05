@@ -1,6 +1,7 @@
 const User = require("../models/user");
 const { signupValidation } = require("../utils/validation");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const userSignup = async (req, res) => {
   try {
@@ -36,8 +37,34 @@ const userLogin = async (req, res) => {
     const isValidPassword = await bcrypt.compare(password, user.password);
 
     if (!isValidPassword) {
-      res.send("Invalid Credentials.");
-    } else res.send("Login Successful");
+      throw new Error("Invalid Credentials.");
+    } else {
+      const token = jwt.sign({ _id: user._id }, "DEV_TIDER@1506", {
+        expiresIn: "1d",
+      });
+      res.cookie("token", token, {
+        expires: new Date(Date.now() + 8 * 3600000), // Cookie will be removed after 8 hrs
+      }); // Set the cookie
+      res.send("Login Successfull");
+    }
+  } catch (err) {
+    res.status(400).send("ERROR: " + err.message);
+  }
+};
+
+const userProfile = async (req, res) => {
+  try {
+    const user = req.user;
+    res.send(user);
+  } catch (err) {
+    res.status(400).send("ERROR: " + err.message);
+  }
+};
+
+const sendConnectionRequest = async (req, res) => {
+  try {
+    const user = req.user;
+    res.send(user.firstName + " has sent a connection request");
   } catch (err) {
     res.status(400).send("ERROR: " + err.message);
   }
@@ -108,4 +135,6 @@ module.exports = {
   getAllUsersData,
   deleteUser,
   updateUser,
+  userProfile,
+  sendConnectionRequest,
 };
