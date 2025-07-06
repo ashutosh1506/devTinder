@@ -13,4 +13,18 @@ const signupValidation = (req) => {
     throw new Error("Password is not valid!");
   }
 };
-module.exports = { signupValidation };
+const profileUpdateValidation = (req) => {
+  const data = req.body;
+  const ALLOWED_UPDATES = [
+    "firstName",
+    "lastName",
+    "gender",
+    "age",
+    "photoURL",
+    "skills",
+  ];
+
+  const isAllowed = Object.keys(data).every((k) => ALLOWED_UPDATES.includes(k));
+  return isAllowed;
+};
+module.exports = { signupValidation, profileUpdateValidation };
