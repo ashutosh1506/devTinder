@@ -47,3 +47,7 @@
 - npm i cookie-parser
 - const cookies = req.cookies.token;
 - app.use(cookieParser()); (app.js)
+
+# schema.pre("save", function(){});
+
+- to handle cases before saving to databases
