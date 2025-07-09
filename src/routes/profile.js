@@ -1,7 +1,6 @@
 const express = require("express");
 const { userAuth } = require("../middlewares/auth");
 const { profileUpdateValidation } = require("../utils/validation");
-const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const profileRouter = express.Router();
 
@@ -13,31 +12,6 @@ profileRouter.get("/profile/view", userAuth, async (req, res) => {
     res.status(400).send("ERROR: " + err.message);
   }
 });
-
-// All Users Data API
-// const getAllUsersData = async (req, res) => {
-//     const users = await User.find({});
-//     if (!users.length) {
-//       res.status(404).send("User Not Found");
-//     } else {
-//       res.send(users);
-//     }
-//   };
-//   // Delete a user using Id
-//   const deleteUser = async (req, res) => {
-//     const userId = req.params.userId;
-
-//     try {
-//       const user = await User.findByIdAndDelete(userId);
-//       if (!user) {
-//         res.status(404).send("User Not Found");
-//       } else {
-//         res.send("User Delelted Successfully");
-//       }
-//     } catch (err) {
-//       res.status(400).send("Error Deleting User: " + err.message);
-//     }
-//   };
 
 profileRouter.patch("/profile/edit", userAuth, async (req, res) => {
   try {
