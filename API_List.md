@@ -22,5 +22,5 @@
 # userRouter
 
 - GET /user/requests/received: Get all the pending connection request for the loggedIn User
-- GET /user/connections
+- GET /user/connections: Get all the connection of user
 - GET /user/feed - Gets you the profiles of other users
