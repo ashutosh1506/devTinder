@@ -51,3 +51,9 @@
 # schema.pre("save", function(){});
 
 - to handle cases before saving to databases
+
+# ref and populate
+
+- To create relationship between schemas
+- ref : "Schema_Name"
+- Read about ref and populate : https://mongoosejs.com/docs/populate.html
