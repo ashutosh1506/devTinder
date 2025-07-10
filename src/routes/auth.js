@@ -33,7 +33,7 @@ authRouter.post("/login", async (req, res) => {
 
     const user = await User.findOne({ email: email });
     if (!user) {
-      return res.send("Invalid Credentials.");
+      return res.status(404).send("Invalid Credentials.");
     }
 
     const isValidPassword = await user.validatePassword(password);
@@ -45,10 +45,10 @@ authRouter.post("/login", async (req, res) => {
       res.cookie("token", token, {
         expires: new Date(Date.now() + 8 * 3600000), // Cookie will be removed after 8 hrs
       }); // Set the cookie
-      res.json({ data: user });
+      res.send(user);
     }
   } catch (err) {
-    res.status(400).send("ERROR: " + err.message);
+    res.status(400).send(err.message);
   }
 });
 

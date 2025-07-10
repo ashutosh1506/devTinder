@@ -26,6 +26,8 @@
 - Installed @redux/toolkit + react-redux => configureStore => Provider => createSlice => Add Reducer to store
 - Navbar should update as soon as user logs in
 - Refactor code to add constants file
+- if token is not present, redirect user to login page
+- Logout Functionality
 
 ## Components
 
