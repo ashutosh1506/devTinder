@@ -39,7 +39,7 @@ const userSchema = new mongoose.Schema(
     photoURL: {
       type: String,
       default:
-        "https://icons.iconarchive.com/icons/icons8/android/256/Users-User-icon.png",
+        "https://img.icons8.com/?size=100&id=nULzKoWMIRQw&format=png&color=7950F2",
       validate(value) {
         if (!validator.isURL(value)) {
           throw new Error("Enter a valid photo URL");

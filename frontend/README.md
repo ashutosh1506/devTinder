@@ -1,6 +1,6 @@
-## DevTinder UI
+# DevTinder UI
 
-# Steps
+## Steps
 
 - Created vite@latest
 - Setup Tailwind
@@ -10,7 +10,7 @@
 - Created Body Component
   - Setup child components in this
 - Created Login Component
-- Installed axios
+- Installed axios - for making API call to backend
 - Installed cors in backend
   - const cors = require("cors");
   - app.use(cors());
@@ -23,8 +23,11 @@
     - whenever you are making API Call so pass {withCredentials: true} =>
       - const res = await axios.post(
         "http://localhost:7777/login",{email, password,}, { withCredentials: true });
+- Installed @redux/toolkit + react-redux => configureStore => Provider => createSlice => Add Reducer to store
+- Navbar should update as soon as user logs in
+- Refactor code to add constants file
 
-# Components
+## Components
 
 - Navbar
 - Login
@@ -32,10 +35,11 @@
 - Body
 - Footer
 
-# Libraries installed
+## Libraries installed
 
 1. Tailwind CSS
 2. DaisyUI
 3. react-router-dom
 4. Axios
 5. cors
+6. Redux/toolkit
