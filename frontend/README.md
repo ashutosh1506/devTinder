@@ -28,6 +28,7 @@
 - Refactor code to add constants file
 - if token is not present, redirect user to login page
 - Logout Functionality
+- Profile Feature
 
 ## Components
 

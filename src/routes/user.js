@@ -4,7 +4,7 @@ const ConnectionRequest = require("../models/connectionRequest");
 const User = require("../models/user");
 const userRouter = express.Router();
 
-const USER_SAFE_DATA = "firstName lastName skills age";
+const USER_SAFE_DATA = "firstName lastName skills age photoURL gender";
 userRouter.get("/user/requests/received", userAuth, async (req, res) => {
   try {
     const loggedInUser = req.user;
@@ -74,7 +74,7 @@ userRouter.get("/user/feed", userAuth, async (req, res) => {
       .skip(skip)
       .limit(limit);
 
-    res.json({ data: users });
+    res.send(users);
   } catch (err) {
     res.status(400).json({ messgae: err.messgae });
   }

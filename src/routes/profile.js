@@ -29,7 +29,7 @@ profileRouter.patch("/profile/edit", userAuth, async (req, res) => {
       data: loggedInUser,
     });
   } catch (err) {
-    res.status(400).send("Error Updating User: " + err.message);
+    res.status(400).send(err.message);
   }
 });
 
