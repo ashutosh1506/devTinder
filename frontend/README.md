@@ -36,6 +36,7 @@
 - Requests Page - See all my connection Requests
 - Feature - Accept/Reject connection request
 - Feature - Send/Ignore the user card from the feed
+- SignUP API
 
 ## Components
 
