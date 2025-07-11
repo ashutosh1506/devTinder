@@ -11,8 +11,10 @@ const UserCard = ({ user }) => {
         {age && gender && <p>{gender + "   " + age} </p>}
         {skills && <p> Skills : {skills.join(",")}</p>}
         <div className="card-actions mb-4">
-          <button className="btn btn-secondary">Interested</button>
-          <button className="btn btn-primary">Ignore</button>
+          <button className="btn btn-secondary text-base-300">
+            Interested
+          </button>
+          <button className="btn btn-primary text-base-300">Ignore</button>
         </div>
       </div>
     </div>

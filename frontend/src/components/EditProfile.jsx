@@ -34,7 +34,7 @@ const EditProfile = ({ user }) => {
   return (
     <>
       <div className="flex justify-center my-10">
-        <div className="flex justify-center mx-10">
+        <div className="flex justify-center ">
           <div className="card bg-base-300 w-96 shadow-sm">
             <div className="card-body">
               <h2 className="card-title justify-center my-4 text-2xl">
@@ -107,6 +107,7 @@ const EditProfile = ({ user }) => {
             </div>
           </div>
         </div>
+        <div className="divider divider-horizontal"></div>
         <UserCard
           user={{ firstName, lastName, age, gender, skills, photoURL }}
         />
