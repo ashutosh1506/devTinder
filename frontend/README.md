@@ -31,8 +31,9 @@
 - Profile Component
   - Edit Profile feature
   - Live Profile update
-- Feed Component
-- See all my connections
+- Feed Component - See all the other users
+- Connections Page - See all my connections
+- Requests Page - See all my connection Requests
 
 ## Components
 

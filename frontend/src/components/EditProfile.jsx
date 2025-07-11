@@ -31,6 +31,7 @@ const EditProfile = ({ user }) => {
       setError(err.response.data);
     }
   };
+  if (!user) return <p>Loadinf...</p>;
   return (
     <>
       <div className="flex justify-center my-10">
