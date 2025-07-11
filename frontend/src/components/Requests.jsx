@@ -1,12 +1,24 @@
 import axios from "axios";
 import { BASE_URL } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
-import { addRequests } from "../utils/requestSlice";
-import { useEffect } from "react";
+import { addRequests, removeSingleRequest } from "../utils/requestSlice";
+import { useEffect, useState } from "react";
 
 const Requests = () => {
   const dispatch = useDispatch();
   const requests = useSelector((store) => store.requests);
+  const reviewRequest = async (status, reqId) => {
+    try {
+      const res = axios.post(
+        BASE_URL + "/request/review/" + status + "/" + reqId,
+        {},
+        { withCredentials: true }
+      );
+      dispatch(removeSingleRequest(reqId));
+    } catch (err) {
+      console.error(err);
+    }
+  };
   const fetchRequests = async () => {
     if (requests) return;
     try {
@@ -50,10 +62,16 @@ const Requests = () => {
                   {gender && <p>{"Gender: " + gender}</p>}
                 </div>
                 <div className="card-actions justify-center flex flex-col">
-                  <button className="btn btn-accent w-35 text-base-300">
+                  <button
+                    className="btn btn-accent w-35 text-base-300"
+                    onClick={() => reviewRequest("accepted", request._id)}
+                  >
                     Accept
                   </button>
-                  <button className="btn  bg-error text-base-content w-35">
+                  <button
+                    className="btn  bg-error text-base-content w-35"
+                    onClick={() => reviewRequest("rejected", request._id)}
+                  >
                     Reject
                   </button>
                 </div>

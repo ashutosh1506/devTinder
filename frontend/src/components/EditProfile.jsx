@@ -109,9 +109,11 @@ const EditProfile = ({ user }) => {
           </div>
         </div>
         <div className="divider divider-horizontal"></div>
-        <UserCard
-          user={{ firstName, lastName, age, gender, skills, photoURL }}
-        />
+        {user && (
+          <UserCard
+            user={{ firstName, lastName, age, gender, skills, photoURL }}
+          />
+        )}
       </div>
       {showToast && (
         <div className="toast toast-top toast-end">

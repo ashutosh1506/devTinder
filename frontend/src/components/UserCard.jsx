@@ -1,4 +1,5 @@
 const UserCard = ({ user }) => {
+  if (!user) return null;
   const { firstName, lastName, photoURL, age, gender, skills } = user;
 
   return (
