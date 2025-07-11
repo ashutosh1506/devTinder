@@ -34,6 +34,8 @@
 - Feed Component - See all the other users
 - Connections Page - See all my connections
 - Requests Page - See all my connection Requests
+- Feature - Accept/Reject connection request
+- Feature - Send/Ignore the user card from the feed
 
 ## Components
 

@@ -19,12 +19,18 @@ const Feed = () => {
   useEffect(() => {
     getFeed();
   }, []);
+
+  if (!feed) return;
+  if (feed.length <= 0)
+    return (
+      <h1 className="text-3xl flex justify-center w-80 my-20 rounded-sm h-15 items-center mx-auto ">
+        No More Users Found
+      </h1>
+    );
   return (
-    feed && (
-      <div className="flex justify-center my-10 ">
-        {feed && <UserCard user={feed[0]} />}
-      </div>
-    )
+    <div className="flex justify-center my-10 ">
+      {feed && <UserCard user={feed[0]} />}
+    </div>
   );
 };
 
